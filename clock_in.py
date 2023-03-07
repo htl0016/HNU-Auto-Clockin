@@ -25,8 +25,8 @@ def captchaOCR():
     captcha = ''
     token   = '' 
     while len(captcha) != 4:
-        token = requests.get('https://fangkong.hnu.edu.cn/api/v1/account/getimgvcode').json()['data']['Token']
-        image_raw = requests.get(f'https://fangkong.hnu.edu.cn/imagevcode?token={token}').content
+        token = requests.get('http://10.162.30.134:8090/JX_ZFDSJ/login.do').json()['data']['Token']
+        image_raw = requests.get(f'http://10.162.30.134:8090/JX_ZFDSJ/login.do={token}').content
         image = cv2.imdecode(np.frombuffer(image_raw, np.uint8), cv2.IMREAD_COLOR)
         try:
             captcha = recognize(image)
@@ -80,11 +80,11 @@ def login():
     return headers
 
 def setLocation():
-    real_address = "湖南大学天马学生公寓" # 在此填写详细地址
+    real_address = "江西省鹰潭市府前路24号" # 在此填写详细地址
     return real_address
 
 def main():
-    clockin_url = 'https://fangkong.hnu.edu.cn/api/v1/clockinlog/add'
+    clockin_url = 'http://10.162.30.134:8090/JX_ZFDSJ/login.do'
     try:
         headers = login()
     except:
